@@ -1,5 +1,6 @@
 """Audit the exact staged Git snapshot before publication (standard library only)."""
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
+import json
 import re
 import subprocess
 import sys
@@ -12,7 +13,16 @@ EXACT_FILES = {"papers/README.md", "slides/README.md", "slides/espresso-overview
 FORBIDDEN_PARTS = {"archive", "private", "local", ".git", "__pycache__", "build", ".vscode"}
 ALLOWED_SUFFIXES = {".md", ".py", ".cpp", ".h", ".hpp", ".json", ".v", ".tcl", ".txt", ".csv", ".png", ".yml", ".cff"}
 SECRETS = re.compile(rb"(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,}|-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----)")
-SENSOR = re.compile("tianmou|tmc_|lyn_cam|天眸|天目", re.IGNORECASE)
+
+
+def local_exclusions():
+    policy = Path(__file__).resolve().parents[1] / "private/release-policy.json"
+    if not policy.exists():
+        return None
+    terms = json.loads(policy.read_text(encoding="utf-8"))["excluded_terms"]
+    if not isinstance(terms, list) or not terms or not all(isinstance(term, str) and term for term in terms):
+        raise ValueError("Local release policy must contain nonempty exclusion terms")
+    return re.compile("|".join(re.escape(term) for term in terms), re.IGNORECASE)
 
 
 def git(*args):
@@ -20,6 +30,7 @@ def git(*args):
 
 
 def main():
+    excluded = local_exclusions()
     entries = git("ls-files", "--stage", "-z").split(b"\0")
     errors, total, count = [], 0, 0
     for entry in entries:
@@ -47,10 +58,8 @@ def main():
         data = git("cat-file", "blob", oid)
         if SECRETS.search(data):
             errors.append(f"Credential marker: {name}")
-        # The policy and this audit must be allowed to describe exclusions.
-        if name not in {"docs/RELEASE_SCOPE.md", "tools/audit_release.py"}:
-            if SENSOR.search(name) or SENSOR.search(data.decode("utf-8", errors="replace")):
-                errors.append(f"Excluded sensor material: {name}")
+        if excluded and (excluded.search(name) or excluded.search(data.decode("utf-8", errors="replace"))):
+            errors.append(f"Excluded material: {name}")
         if path.suffix != ".png" and name != "tools/audit_release.py":
             if re.search(rb"[A-Za-z]:[/\\](?:Users|Academy|Event)|/home/[^/]+/", data):
                 errors.append(f"Machine-specific path: {name}")
