@@ -12,12 +12,13 @@
 !/NOTICE.md
 !/requirements.txt
 !/CMakeLists.txt
-!/src/
-!/hardware/
+!/Costmodel/
+!/verilog/
+!/fpga/
 !/papers/
 !/slides/
 !/results/
-!/examples/
+!/input_example/
 !/docs/
 !/tools/
 !/.github/

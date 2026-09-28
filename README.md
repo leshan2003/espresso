@@ -7,11 +7,12 @@ EspressoCostModel, EspressoResource, and AccSRC.
 
 | Directory | Contents |
 | --- | --- |
-| [src/cost_model](src/cost_model) | Python cycle model and portable command-line runner |
-| [src/cost_model_cpp](src/cost_model_cpp) | Historical C++17 model |
-| [hardware](hardware/README.md) | Espresso pipeline, scheduler experiment, and AccSRC RTL |
+| [Costmodel](Costmodel/README.md) | Python and C++ cost models, with their configurations |
+| [verilog/design](verilog/design) | Design RTL, grouped by revision |
+| [verilog/simulation](verilog/simulation/README.md) | Testbenches and event-input simulation helpers |
+| [fpga](fpga/README.md) | Vivado Tcl scripts |
+| [input_example](input_example/README.md) | Small synthetic event input |
 | [results/resource](results/resource/README.md) | Resource measurements and plotting code |
-| [examples](examples/README.md) | Small synthetic event input |
 | [papers](papers/README.md) | Publication links and citations |
 | [slides](slides/README.md) | Public architecture overview |
 
@@ -21,7 +22,7 @@ Use Python 3.10 or later:
 
 ```sh
 python -m pip install -r requirements.txt
-python src/cost_model/run.py examples/events/synthetic.txt
+python Costmodel/python/run.py input_example/events/synthetic.txt
 ```
 
 The included example produces **3,891 model clock cycles**. At the default
@@ -43,7 +44,7 @@ ctest --test-dir build --output-on-failure
 ```
 
 ```sh
-./build/latencytest src/cost_model_cpp/config/EspressoHarris_config.json examples/events/synthetic.txt
+./build/latencytest Costmodel/cpp/config/EspressoHarris_config.json input_example/events/synthetic.txt
 ```
 
 On Windows, select a compiler generator available on your system. The executable
@@ -55,7 +56,8 @@ equivalent during repository consolidation. See [reproducibility notes](docs/REP
 
 ## FPGA and publications
 
-See [hardware instructions](hardware/README.md) for the Vivado project generator.
+See [FPGA instructions](fpga/README.md) for the Vivado project generator and
+[Verilog sources](verilog/README.md) for the design revisions.
 See [papers](papers/README.md) and [CITATION.cff](CITATION.cff) for attribution.
 
 This release contains the generic Espresso architecture. Sensor SDKs, captures,

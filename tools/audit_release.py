@@ -7,9 +7,9 @@ import sys
 
 ROOT_FILES = {".gitignore", ".gitattributes", "README.md", "NOTICE.md",
               "CITATION.cff", "CMakeLists.txt", "requirements.txt"}
-PREFIXES = ("src/cost_model/", "src/cost_model_cpp/", "hardware/", "examples/",
+PREFIXES = ("Costmodel/python/", "Costmodel/cpp/", "verilog/", "fpga/", "input_example/",
             "results/resource/", "docs/", "tools/", ".github/workflows/")
-EXACT_FILES = {"papers/README.md", "slides/README.md", "slides/espresso-overview.md", "results/README.md"}
+EXACT_FILES = {"Costmodel/README.md", "papers/README.md", "slides/README.md", "slides/espresso-overview.md", "results/README.md"}
 FORBIDDEN_PARTS = {"archive", "private", "local", ".git", "__pycache__", "build", ".vscode"}
 ALLOWED_SUFFIXES = {".md", ".py", ".cpp", ".h", ".hpp", ".json", ".v", ".tcl", ".txt", ".csv", ".png", ".yml", ".cff"}
 SECRETS = re.compile(rb"(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,}|-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----)")

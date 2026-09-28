@@ -42,11 +42,11 @@ suppression stages.
 
 ## Explore the implementation
 
-- Python cycle model: `src/cost_model/`
-- C++ research revision: `src/cost_model_cpp/`
-- Main pipeline: `hardware/espresso/`
-- Scheduler experiment: `hardware/scheduler/`
-- Earlier AccSRC design: `hardware/accsrc/`
+- Python and C++ models: `Costmodel/`
+- Design RTL: `verilog/design/`
+- Testbenches and simulation helpers: `verilog/simulation/`
+- FPGA Tcl scripts: `fpga/`
+- Synthetic input: `input_example/`
 - Resource measurements: `results/resource/`
 
 ---
@@ -54,7 +54,7 @@ suppression stages.
 ## Reproduce the software smoke test
 
 ```sh
-python src/cost_model/run.py examples/events/synthetic.txt
+python Costmodel/python/run.py input_example/events/synthetic.txt
 ```
 
 The 12 synthetic events produce 3,891 Python model cycles. This example checks

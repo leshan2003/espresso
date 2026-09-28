@@ -6,12 +6,12 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNNER = ROOT / "src/cost_model/run.py"
+RUNNER = ROOT / "Costmodel/python/run.py"
 
 
 def main():
     with tempfile.TemporaryDirectory() as temporary:
-        result = subprocess.run([sys.executable, str(RUNNER), str(ROOT / "examples/events/synthetic.txt")],
+        result = subprocess.run([sys.executable, str(RUNNER), str(ROOT / "input_example/events/synthetic.txt")],
                                 cwd=temporary, capture_output=True, text=True, check=True, timeout=30)
         output = json.loads(result.stdout)
         assert output["clock_cycles"] == 3891, output
