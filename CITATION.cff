@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "Please cite the Espresso publication relevant to your use of this code."
+title: "Espresso: Spatiotemporal Ordering for Sparse Vision Processing"
+type: software
+repository-code: "https://github.com/leshan2003/espresso"
+authors:
+  - family-names: Li
+    given-names: Leshan
+  - family-names: Li
+    given-names: Hongyi
+  - family-names: Yang
+    given-names: Qingyuan
+  - family-names: Wang
+    given-names: Taoyi
+  - family-names: Lin
+    given-names: Yihan
+  - family-names: Ou
+    given-names: Mingtao
+  - family-names: Zhao
+    given-names: Rong
+  - family-names: Ji
+    given-names: Xinglong
+references:
+  - type: conference-paper
+    title: "Espresso: Exploiting the Sparsity Property in Event Sensors with Spatiotemporal Ordering"
+    doi: "10.1109/DAC63849.2025.11132508"
+    year: 2025
+    authors:
+      - {family-names: Li, given-names: Leshan}
+      - {family-names: Li, given-names: Hongyi}
+      - {family-names: Yang, given-names: Qingyuan}
+      - {family-names: Ou, given-names: Mingtao}
+      - {family-names: Zhao, given-names: Rong}
+      - {family-names: Ji, given-names: Xinglong}
+  - type: article
+    title: "Espresso: Exploiting the Sparsity Property in Brain-Inspired Vision Sensors With Spatiotemporal Ordering"
+    doi: "10.1109/TCAD.2025.3638266"
+    year: 2026
+    authors:
+      - {family-names: Li, given-names: Leshan}
+      - {family-names: Li, given-names: Hongyi}
+      - {family-names: Yang, given-names: Qingyuan}
+      - {family-names: Wang, given-names: Taoyi}
+      - {family-names: Lin, given-names: Yihan}
+      - {family-names: Ou, given-names: Mingtao}
+      - {family-names: Zhao, given-names: Rong}
+      - {family-names: Ji, given-names: Xinglong}

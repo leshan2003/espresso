@@ -1,0 +1,20 @@
+{
+    "network": {
+        "sparse_sobel": {
+            "kernelsize": 3,
+            "datawidth": 4
+        },
+        "sparse_gaussian_harris": {
+            "kernelsize": 5,
+            "datawidth": 8
+        },
+        "sparse_nms": {
+            "kernelsize": 5,
+            "datawidth": 16
+        }
+    },
+    "imginfo" :{
+        "img_width": 256,
+        "img_height": 320
+    }
+}

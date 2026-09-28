@@ -1,0 +1,19 @@
+{
+    "network": {
+        "1sobel": {
+            "kernelsize": 3,
+            "datawidth": 4,
+            "computelatency": 1
+        },
+        "2guassian_harris": {
+            "kernelsize": 5,
+            "datawidth": 8,
+            "computelatency": 3
+        },
+        "3nms": {
+            "kernelsize": 5,
+            "datawidth": 16,
+            "computelatency": 2
+        }
+    }
+}

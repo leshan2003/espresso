@@ -1,0 +1,16 @@
+{
+    "network": {
+        "sobel": {
+            "kernelsize": 3,
+            "datawidth": 4
+        },
+        "gaussian_harris": {
+            "kernelsize": 9,
+            "datawidth": 8
+        }
+    },
+    "imginfo" :{
+        "img_width": 256,
+        "img_height": 320
+    }
+}

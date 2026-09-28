@@ -1,0 +1,24 @@
+{
+    "network": {
+        "conv1": {
+            "kernelsize": 5,
+            "datawidth": 4
+        },
+        "pool1": {
+            "kernelsize": 2,
+            "datawidth": 4
+        },
+        "conv2": {
+            "kernelsize": 5,
+            "datawidth": 4
+        },
+        "pool2": {
+            "kernelsize": 2,
+            "datawidth": 4
+        }
+    },
+    "imginfo" :{
+        "img_width": 32,
+        "img_height": 32
+    }
+}
