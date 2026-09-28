@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/02/20 12:11:33
-// Design Name:
-// Module Name: EventScheduler5_3
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Window-address scheduling and downstream request handling.
 
 module EventScheduler5_3 #(
     parameter DATA_WIDTH = 14,
@@ -53,6 +34,9 @@ reg [DATA_WIDTH-0:0] last_event_value_xy;
 reg [DATA_WIDTH-1:0] last_event_value_yy;
 reg [16-1:0] last_available_window_addr;
 reg [16-1:0] todo_window_addr_fifo [0:TODO_WINDOW_FIFO_DEPTH-1][0:WINDOW_SIZE-1];
+reg [6:0] todo_window_addr_fifo_wrpt[0:WINDOW_SIZE-1];
+reg [6:0] todo_window_addr_fifo_rdpt[0:WINDOW_SIZE-1];
+reg [16-1:0] min_todo_addr;
 wire [15:0] diff10 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[1]][1] - todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0];
 wire [15:0] diff20 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[2]][2] - todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0];
 wire [15:0] diff30 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[3]][3] - todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0];
@@ -73,9 +57,6 @@ wire [15:0] sel1 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[1]][1] - min
 wire [15:0] sel2 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[2]][2] - min_todo_addr - 1;
 wire [15:0] sel3 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[3]][3] - min_todo_addr - 1;
 wire [15:0] sel4 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[4]][4] - min_todo_addr - 1;
-reg [6:0] todo_window_addr_fifo_wrpt[0:WINDOW_SIZE-1];
-reg [6:0] todo_window_addr_fifo_rdpt[0:WINDOW_SIZE-1];
-reg [16-1:0] min_todo_addr;
 
 reg [2:0] state;
 reg [3:0] wait_cnt;

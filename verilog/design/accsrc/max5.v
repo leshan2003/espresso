@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2024/11/07 22:21:17
-// Design Name:
-// Module Name: max5
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Registered unsigned maximum of five values; ties prefer the lowest index.
 
 module max5 #(
     parameter DATA_WIDTH = 46
@@ -27,7 +8,7 @@ module max5 #(
     input wire rst_n,
     input wire [DATA_WIDTH*5-1:0] in_window_value,
     input wire in_window_valid,
-    output reg out_max_value,
+    output reg [DATA_WIDTH-1:0] out_max_value,
     output reg ifmiddle,
     output reg out_max_valid
     );

@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/02/20 12:08:01
-// Design Name:
-// Module Name: ShiftHashTable5_3
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Sparse row storage and neighborhood-window reads.
 
 module ShiftHashTable5_3 #(
     parameter DATA_WIDTH = 14,
@@ -64,9 +45,9 @@ wire [7:0] in_addr_row = in_event_addr_0[15:8];
 wire [7:0] in_addr_col = in_event_addr_0[7:0];
 wire [7:0] out_addr_row = out_window_addr[15:8];
 wire [7:0] out_addr_col = out_window_addr[7:0];
+reg [7:0] current_addr_row;
 wire [7:0] in_row_diff = in_addr_row - current_addr_row;
 wire [7:0] out_row_diff = out_addr_row - current_addr_row;
-reg [7:0] current_addr_row;
 
 initial begin
     write_done <= 0;

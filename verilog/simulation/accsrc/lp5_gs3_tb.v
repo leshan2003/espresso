@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2024/11/13 20:49:56
-// Design Name:
-// Module Name: lp5_gs3_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Historical simulation harness; see verilog/simulation/README.md for fixtures.
 
 module lp5_gs3_tb #(
     parameter DATA_WIDTH = 4,

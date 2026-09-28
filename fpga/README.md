@@ -18,6 +18,7 @@ Projects are generated under `build/vivado/VARIANT/`, and an existing project
 will not be overwritten. The device is `xczu7ev-ffvc1156-2-e` (ZCU104). Provide
 your own board pin assignments and timing constraints before implementation.
 
-The script enables Vivado's `--relax` simulation compatibility option for
-historical declaration-order issues. It does not launch synthesis or simulation.
+The sources support Vivado's strict declaration checks. The project script does
+not launch synthesis or simulation. Run the independent component regression
+with `python tools/check_rtl.py --engine vivado`.
 Build output and vendor-generated files are excluded from Git.

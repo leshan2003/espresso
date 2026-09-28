@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2024/11/07 22:37:05
-// Design Name:
-// Module Name: fd_top_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Historical simulation harness; see verilog/simulation/README.md for fixtures.
 
 module fd_top_tb(
 
@@ -37,7 +18,7 @@ FD_top #(
     .in_event_valid_0(in_event_valid_0),
     .in_event_value_0(in_event_value_0),
     .in_event_addr_0(in_event_addr_0),
-    .ready_for_new_feature(1),
+    .ready_for_new_feature(1'b1),
     .event_req(event_req),
     .out_isfeature(isfeature),
     .out_feature_addr(feature_addr),

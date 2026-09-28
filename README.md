@@ -25,6 +25,10 @@ python -m pip install -r requirements.txt
 python Costmodel/python/run.py input_example/events/synthetic.txt
 ```
 
+The model itself uses only the standard library; the requirements file supplies
+dependencies for plotting resource results. Run its regression suite with
+`python tools/check_model.py`.
+
 The included example produces **3,891 model clock cycles**. At the default
 100 MHz this is 38.91 microseconds. These are synthetic smoke-test results,
 not the experimental throughput reported in the papers.

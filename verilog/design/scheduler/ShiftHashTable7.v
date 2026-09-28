@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/09/24 14:00:10
-// Design Name:
-// Module Name: ShiftHashTable7
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Sparse row storage and neighborhood-window reads.
 
 module ShiftHashTable7 #(
     parameter DATA_WIDTH = 4,
@@ -53,9 +34,9 @@ wire [HALF_ADDR_WIDTH-1:0] in_addr_row = in_event_addr_0[2*HALF_ADDR_WIDTH-1:HAL
 wire [HALF_ADDR_WIDTH-1:0] in_addr_col = in_event_addr_0[HALF_ADDR_WIDTH-1:0];
 wire [HALF_ADDR_WIDTH-1:0] out_addr_row = out_window_addr[2*HALF_ADDR_WIDTH-1:HALF_ADDR_WIDTH];
 wire [HALF_ADDR_WIDTH-1:0] out_addr_col = out_window_addr[HALF_ADDR_WIDTH-1:0];
+reg [HALF_ADDR_WIDTH-1:0] current_addr_row;
 wire [HALF_ADDR_WIDTH-1:0] in_row_diff = in_addr_row - current_addr_row;
 wire signed [HALF_ADDR_WIDTH-1:0] out_row_diff = out_addr_row - current_addr_row;
-reg [HALF_ADDR_WIDTH-1:0] current_addr_row;
 
 initial begin
     write_done <= 0;

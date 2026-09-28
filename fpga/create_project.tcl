@@ -25,8 +25,6 @@ set_property top $top [current_fileset]
 if {$variant eq "accsrc"} {
     set_property top fd_top_tb [get_filesets sim_1]
 }
-set_property -dict [list xsim.compile.xvlog.more_options {--relax} \
-    xsim.elaborate.xelab.more_options {--relax}] [get_filesets sim_1]
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 # Deliberately no implementation run: board pins and timing constraints must be

@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2024/11/13 20:54:09
-// Design Name:
-// Module Name: sb3_gs5_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Historical simulation harness; see verilog/simulation/README.md for fixtures.
 
 module sb3_gs5_tb #(
     parameter DATA_WIDTH = 4,

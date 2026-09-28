@@ -1,0 +1,152 @@
+{
+  "source_commit": "16a1dadda6279830330353bdf5173327f8d92f1b",
+  "cases": [
+    {
+      "name": "cluster",
+      "events": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          -1
+        ],
+        [
+          6,
+          6,
+          1
+        ],
+        [
+          15,
+          15,
+          3
+        ],
+        [
+          30,
+          30,
+          1
+        ]
+      ],
+      "python_cycles": {
+        "EspressoHarris_2layer_config": 920,
+        "EspressoHarris_config": 1867,
+        "EspressoHarris_merged_config": 1564,
+        "EspressoHarris_sparse_config": 99,
+        "EspressoLeNet_config": 2562
+      },
+      "cpp_cycles": 2153
+    },
+    {
+      "name": "row_gaps",
+      "events": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          5,
+          4,
+          2
+        ],
+        [
+          12,
+          20,
+          3
+        ],
+        [
+          23,
+          6,
+          1
+        ]
+      ],
+      "python_cycles": {
+        "EspressoHarris_2layer_config": 823,
+        "EspressoHarris_config": 1727,
+        "EspressoHarris_merged_config": 1425,
+        "EspressoHarris_sparse_config": 58,
+        "EspressoLeNet_config": 2257
+      },
+      "cpp_cycles": 2752
+    },
+    {
+      "name": "duplicates",
+      "events": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          8,
+          8,
+          3
+        ]
+      ],
+      "python_cycles": {
+        "EspressoHarris_2layer_config": 206,
+        "EspressoHarris_config": 289,
+        "EspressoHarris_merged_config": 254,
+        "EspressoHarris_sparse_config": 46,
+        "EspressoLeNet_config": 433
+      },
+      "cpp_cycles": 329
+    },
+    {
+      "name": "image_edges",
+      "events": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          31,
+          2
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          30,
+          31,
+          1
+        ],
+        [
+          31,
+          31,
+          2
+        ]
+      ],
+      "python_cycles": {
+        "EspressoHarris_2layer_config": 794,
+        "EspressoHarris_config": 1920,
+        "EspressoHarris_merged_config": 1654,
+        "EspressoHarris_sparse_config": 75,
+        "EspressoLeNet_config": 1088
+      },
+      "cpp_cycles": 2954
+    }
+  ]
+}

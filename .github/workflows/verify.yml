@@ -14,4 +14,6 @@ jobs:
       - run: python tools/audit_release.py
       - run: python tools/check_model.py
       - run: cmake -S . -B build && cmake --build build && ctest --test-dir build --output-on-failure
+      - run: sudo apt-get update && sudo apt-get install -y iverilog
+      - run: python tools/check_rtl.py
       - run: python results/resource/plot.py

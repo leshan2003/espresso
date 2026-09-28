@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/09/24 14:24:58
-// Design Name:
-// Module Name: EventScheduler2
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Window-address scheduling and downstream request handling.
 
 module EventScheduler2 #(
     parameter DATA_WIDTH = 4,
@@ -50,14 +31,14 @@ wire [2*HALF_ADDR_WIDTH-1:0] event_addr_diff = in_event_addr - last_event_addr;
 reg [DATA_WIDTH-1:0] last_event_value;
 reg [2*HALF_ADDR_WIDTH-1:0] last_available_window_addr;
 reg [2*HALF_ADDR_WIDTH-1:0] todo_window_addr_fifo [0:TODO_WINDOW_FIFO_DEPTH-1][0:WINDOW_SIZE-1];
+reg [6:0] todo_window_addr_fifo_wrpt[0:WINDOW_SIZE-1];
+reg [6:0] todo_window_addr_fifo_rdpt[0:WINDOW_SIZE-1];
+reg [2*HALF_ADDR_WIDTH-1:0] min_todo_addr;
 wire [2*HALF_ADDR_WIDTH-1:0] diff10 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[1]][1] - todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0];
 wire [2*HALF_ADDR_WIDTH-1:0] diff0 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0] - last_available_window_addr;
 wire [2*HALF_ADDR_WIDTH-1:0] diff1 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[1]][1] - last_available_window_addr;
 wire [2*HALF_ADDR_WIDTH-1:0] sel0 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[0]][0] - min_todo_addr - 1;
 wire [2*HALF_ADDR_WIDTH-1:0] sel1 = todo_window_addr_fifo[todo_window_addr_fifo_rdpt[1]][1] - min_todo_addr - 1;
-reg [6:0] todo_window_addr_fifo_wrpt[0:WINDOW_SIZE-1];
-reg [6:0] todo_window_addr_fifo_rdpt[0:WINDOW_SIZE-1];
-reg [2*HALF_ADDR_WIDTH-1:0] min_todo_addr;
 
 // reg [2:0] state;
 assign ready_for_new_event = (state == 3'b000);

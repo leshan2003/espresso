@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2024/11/07 12:11:16
-// Design Name:
-// Module Name: sys_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Historical simulation harness; see verilog/simulation/README.md for fixtures.
 
 module sys_tb #(
     parameter DATA_WIDTH = 4,
@@ -138,7 +119,7 @@ gauss5 #(
     );
 wire [15:0] in_event_addr_4_xy;
 wire [((DATA_WIDTH+3)*2+8):0] in_event_value_4_xy;
-wire in_event_valid_4_xy, out_event_req_4;
+wire in_event_valid_4_xy;
 gauss5 #(
     .DATA_WIDTH((DATA_WIDTH+3)*2+1)
 ) gauss5_inst_xy (
@@ -155,7 +136,7 @@ gauss5 #(
     );
 wire [15:0] in_event_addr_4_yy;
 wire [((DATA_WIDTH+3)*2+7):0] in_event_value_4_yy;
-wire in_event_valid_4_yy, out_event_req_4;
+wire in_event_valid_4_yy;
 gauss5 #(
     .DATA_WIDTH((DATA_WIDTH+3)*2)
 ) gauss5_inst_yy (

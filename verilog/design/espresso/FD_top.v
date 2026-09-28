@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/02/20 15:24:32
-// Design Name:
-// Module Name: FD_top
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Harris feature-detection pipeline and stage interconnect.
 
 module FD_top #(
     parameter DATA_WIDTH_1 = 4,
@@ -215,7 +196,7 @@ nms5 #(
     .in_window_valid(in_window_valid_6),
     .in_window_addr(in_window_addr_6),
     .ready_for_new_feature(ready_for_new_feature),
-    .threshold(0),
+    .threshold({DATA_WIDTH_4{1'b0}}),
     .out_isfeature(out_isfeature),
     .out_feature_addr(out_feature_addr),
     .out_feature_valid(out_feature_valid),

@@ -1,13 +1,23 @@
 cmake_minimum_required(VERSION 3.16)
 project(Espresso LANGUAGES CXX)
-add_executable(latencytest
-    Costmodel/cpp/latencytest.cpp
-    Costmodel/cpp/component.cpp)
-target_include_directories(latencytest PRIVATE Costmodel/cpp)
-target_compile_features(latencytest PRIVATE cxx_std_17)
-enable_testing()
-add_test(NAME synthetic_events COMMAND latencytest
-    ${CMAKE_CURRENT_SOURCE_DIR}/Costmodel/cpp/config/EspressoHarris_config.json
-    ${CMAKE_CURRENT_SOURCE_DIR}/input_example/events/synthetic.txt)
-set_tests_properties(synthetic_events PROPERTIES
-    PASS_REGULAR_EXPRESSION "Total clock cycles: 3890")
+add_library(espresso_cost_model Costmodel/cpp/component.cpp)
+target_include_directories(espresso_cost_model PUBLIC Costmodel/cpp)
+target_compile_features(espresso_cost_model PUBLIC cxx_std_17)
+if(MSVC)
+    target_compile_options(espresso_cost_model PRIVATE /W4)
+else()
+    target_compile_options(espresso_cost_model PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+add_executable(latencytest Costmodel/cpp/latencytest.cpp)
+target_link_libraries(latencytest PRIVATE espresso_cost_model)
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(model_tests Costmodel/tests/test_cpp.cpp)
+    target_link_libraries(model_tests PRIVATE espresso_cost_model)
+    add_test(NAME model_regressions COMMAND model_tests ${CMAKE_CURRENT_SOURCE_DIR})
+    add_test(NAME synthetic_events COMMAND latencytest
+        ${CMAKE_CURRENT_SOURCE_DIR}/Costmodel/cpp/config/EspressoHarris_config.json
+        ${CMAKE_CURRENT_SOURCE_DIR}/input_example/events/synthetic.txt)
+    set_tests_properties(synthetic_events PROPERTIES
+        PASS_REGULAR_EXPRESSION "Total clock cycles: 3890")
+endif()

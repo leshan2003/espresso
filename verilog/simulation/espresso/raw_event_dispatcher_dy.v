@@ -1,24 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2025/03/03 16:54:00
-// Design Name:
-// Module Name: raw_event_dispatcher_dy
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
+// Simulation-only event input from external hexadecimal fixtures.
 
 module raw_event_dispatcher_dy#(
     parameter EventMEM_DEPTH = 1000,

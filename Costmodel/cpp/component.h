@@ -1,67 +1,72 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef ESPRESSO_COMPONENT_H
+#define ESPRESSO_COMPONENT_H
 
-#include <vector>
+#include <cstdint>
+#include <deque>
+#include <optional>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
-#include <cmath>
-#include <map>
 #include <utility>
+#include <vector>
 
-const int IMGWIDTH = 256;
-const int IMGHEIGHT = 300;
+// Dimensions of the historical C++ model, independent of the Python JSON schema.
+inline constexpr int kImageWidth = 256;
+inline constexpr int kImageHeight = 300;
 
-class Event {
-public:
-    std::pair<int, int> addr2d;
-    int value;
-
-    Event(std::pair<int, int> addr = {0,0}, int val = 0) : addr2d(addr), value(val) {}
+struct Event {
+    std::pair<int, int> address{0, 0};  // row, column
+    int value = 0;
 };
 
-class Eventscheduler {
-private:
-
-public:
-    int halfkernelsize;
-    std::vector<std::vector<std::pair<int, int>>> NPendingFIFOs;
-    Event currentevent;
-    Event lastevent;
-    int outputwindowabsaddr;
-    int curRow;
-    int writedone;
-    int writeclk;
-    int writecompleted;
-    int computeclk;
-
-    int getabsaddr(std::pair<int, int> addr2d);
-    std::pair<int, int> get2daddr(int addrabs);
+struct LayerConfig {
+    std::string name;
     int kernel_size;
     int data_width;
-    std::string kernel_name;
-    int state;  // 0: update, 1: compare, 2: read, 3: write
-    int computelatency;
-    int computedone;
-    Event outputevent;
-    Eventscheduler(std::string name, int size, int width, int computelatency);
-    void step_one_clock(Event inputevent = Event(), int inputeventvalid = 0, int readyforevent = 0);
-    void update_NPendingFIFOs();
-    void update_NPendingFIFOs_remove();
-    int getMinAddrInNPendingFIFOs();
+    int compute_latency;
 };
+
+enum class SchedulerState { Update, Compare, Read, Write };
+
+class EventScheduler {
+public:
+    explicit EventScheduler(LayerConfig config);
+    SchedulerState state() const noexcept { return state_; }
+
+    // Advance one clock. An output is returned only on a ready handshake.
+    std::optional<Event> step(std::optional<Event> input = std::nullopt, bool ready = false);
+
+private:
+    static int absolute_address(std::pair<int, int> address);
+    void enqueue_windows();
+    std::optional<int> next_address() const;
+    void remove_address(int address);
+
+    LayerConfig config_;
+    int half_kernel_;
+    std::vector<std::deque<std::pair<int, int>>> pending_;
+    SchedulerState state_ = SchedulerState::Update;
+    Event current_event_;
+    Event previous_event_;
+    int output_address_ = 0;
+    int current_row_ = 0;
+    bool write_done_ = false;
+    int write_clock_ = 0;
+    bool write_completed_ = false;
+    bool compute_done_ = false;
+    int compute_clock_ = 0;
+};
+
+// Input validation is part of the library API, not just the command-line runner.
+std::vector<Event> load_events(const std::string& path);
 
 class Espresso {
-private:
-    void load_config(std::string config_file);
-
 public:
-    std::map<std::string, std::map<std::string, int>> network;
-    int layernum;
-    std::vector<Eventscheduler> architecture;
-    Espresso(std::string config_file);
-    int process_frame(std::string eventtxtfile);
+    explicit Espresso(const std::string& config_path);
+    std::uint64_t process_frame(const std::string& event_path);
+    std::uint64_t process_events(const std::vector<Event>& events);
+
+private:
+    // C++ preserves the original lexicographic ordering of network keys.
+    std::vector<LayerConfig> layers_;
 };
 
-#endif // COMPONENT_H
+#endif  // ESPRESSO_COMPONENT_H
